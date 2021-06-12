@@ -8,6 +8,8 @@ import {
 } from "@ant-design/icons";
 import { login, facebookLogin } from "../util/ApiUtil";
 import "./Signin.css";
+import properties,{cookies} from '../config/properties';
+
 
 /*global FB*/
 
@@ -15,7 +17,7 @@ const Signin = (props) => {
   const [loading, setLoading] = useState(false);
   const [facebookLoading, setFacebookLoading] = useState(false);
   const [test, setTest] = useState(localStorage.getItem("accessToken"));
-
+  
   useEffect(() => {
     if (localStorage.getItem("accessToken") !== null) {
       props.history.push("/");
@@ -30,7 +32,7 @@ const Signin = (props) => {
   const initFacebookLogin = () => {
     window.fbAsyncInit = function () {
       FB.init({
-        appId: "118319422120166",
+        appId: properties.FB_APP_ID,
         autoLogAppEvents: true,
         xfbml: true,
         version: "v7.0",
@@ -42,6 +44,8 @@ const Signin = (props) => {
     setFacebookLoading(true);
     FB.login(
       function (response) {
+        console.log("fblogin")
+          console.log(response);
         if (response.status === "connected") {
           const facebookLoginRequest = {
             accessToken: response.authResponse.accessToken,
@@ -49,8 +53,12 @@ const Signin = (props) => {
           facebookLogin(facebookLoginRequest)
             .then((response) => {
               localStorage.setItem("accessToken", response.accessToken);
+              cookies.set('fb_accessToken',response.accessToken,{ path: '/' });
               props.history.push("/");
               setFacebookLoading(false);
+              console.log("fblogin")
+          console.log(response);
+              // window.location.href = '/chat';
             })
             .catch((error) => {
               if (error.status === 401) {
@@ -69,7 +77,7 @@ const Signin = (props) => {
               setFacebookLoading(false);
             });
         } else {
-          console.log(response);
+          
         }
       },
       { scope: "email" }
@@ -83,6 +91,7 @@ const Signin = (props) => {
         localStorage.setItem("accessToken", response.accessToken);
         props.history.push("/");
         setLoading(false);
+        window.location.href = '/chat';
       })
       .catch((error) => {
         if (error.status === 401) {

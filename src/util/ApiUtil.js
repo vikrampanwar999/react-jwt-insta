@@ -1,5 +1,6 @@
-const AUTH_SERVICE = "http://localhost:8081";
-const CHAT_SERVICE = "http://localhost:8080";
+import properties from '../config/properties';
+const AUTH_SERVICE = properties.AUTH_SERVICE;
+const CHAT_SERVICE = properties.CHAT_SERVICE;
 
 const request = (options) => {
   const headers = new Headers();
@@ -106,3 +107,40 @@ export function findChatMessage(id) {
     method: "GET",
   });
 }
+
+//link account and fetch the result
+export function registerInstaUserInfo(instaUserINfoRequest){
+  if (!localStorage.getItem("accessToken")) {
+    return Promise.reject("No access token set.");
+  }
+  
+  console.log("inside getInstaUserInfo request ");
+  return request({
+    url: properties.INSTA_USER_REGISTER ,
+    method: "POST",
+    body: JSON.stringify(instaUserINfoRequest),
+  });
+}
+export function getInstaUserInfo(instaUserINfoRequest){
+  if (!localStorage.getItem("accessToken")) {
+    return Promise.reject("No access token set.");
+  }
+  
+  console.log("inside getInstaUserInfo request ");
+  return request({
+    url: properties.GET_INSTA_ASSOCIATED_ACCOUNTS ,
+    method: "GET",
+  });
+}
+// export function linkInstaAccountToFBAccount(instaUserINfoRequest){
+//   if (!localStorage.getItem("accessToken")) {
+//     return Promise.reject("No access token set.");
+//   }
+  
+//   console.log("inside linkInstaAccountToFBAccount request ");
+//   return request({
+//     url: properties.INSTA_USER_INFO ,
+//     method: "POST",
+//     body: JSON.stringify(instaUserINfoRequest),
+//   });
+// }

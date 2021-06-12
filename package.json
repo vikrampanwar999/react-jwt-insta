@@ -8,15 +8,20 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.4.0",
+    "axios": "^0.21.1",
+    "form-data": "^4.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-instagram-login": "^1.4.0",
+    "react-instagram-oauth": "0.0.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-scroll-to-bottom": "^3.0.0",
     "react-stomp": "^5.0.0",
     "recoil": "0.0.10",
-    "sockjs-client": "^1.4.0"
+    "sockjs-client": "^1.4.0",
+    "universal-cookie": "^4.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

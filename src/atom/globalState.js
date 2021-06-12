@@ -22,3 +22,18 @@ export const chatMessages = atom({
     type: "chatMessages",
   },
 });
+
+export const linkedInstaAccounts = atom({
+  key: "linkedInstaAccounts",
+  default: [],
+  persistence_UNSTABLE: {
+    type: "linkedInstaAccounts",
+  },
+});
+export const loggedInInstaUser = atom({
+  key: "loggedInInstaUser",
+  default: {},
+  persistence_UNSTABLE: {
+    type: "loggedInInstaUser",
+  },
+});
